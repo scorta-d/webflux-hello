@@ -1,16 +1,16 @@
 package dz.webfluxhello.ctl;
 
-import org.springframework.stereotype.Component;
+import static reactor.core.publisher.Mono.just;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Mono;
 
-@Component
+@RestController
 public class HelloCtl {
-
-	@GetMapping(path = "/")
+	@GetMapping(value = "/")
 	public Mono<String> getIndex() {
-		return Mono.just("<hr>");
+		return just("Dz<hr/>");
 	}
-
 }
