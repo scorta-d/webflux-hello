@@ -40,8 +40,12 @@ public class AsdfListCtl {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 			}
-			return format(//
-					"<div style=\"border-style: solid;border-width:1px;\">%s id = %d name = %s</div>", //
+			return format(""//
+					+ "<div style=\"" //
+					+ "border-style: solid;" //
+					+ "border-width:1px;" //
+					+ "border-color:yellow;" //
+					+ "\">%s id = %d name = %s</div>", //
 					mPrefix, item.getAsdf(), item.getName() //
 			);
 		}
