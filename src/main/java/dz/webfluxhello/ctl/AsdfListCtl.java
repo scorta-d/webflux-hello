@@ -2,7 +2,6 @@ package dz.webfluxhello.ctl;
 
 import static java.lang.String.format;
 
-import java.util.Iterator;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +28,33 @@ public class AsdfListCtl {
 	}
 
 	public static class Decorator implements Function<Asdf, String> {
+		String mPrefix = "";
+
+		public Decorator(String string) {
+			mPrefix = string;
+		}
+
 		@Override
 		public String apply(Asdf item) {
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 			}
-			return format("<div>id = %d name = %s</div>", item.getAsdf(), item.getName());
+			return format(//
+					"<div style=\"border-style: solid;border-width:1px;\">%s id = %d name = %s</div>", //
+					mPrefix, item.getAsdf(), item.getName() //
+			);
 		}
 	}
 
 	@GetMapping(value = "/liststr")
 	public Flux<String> getListOfStrings() {
-		Function<Asdf, String> decorator = new Decorator();
-		return Flux.zip(
+		Function<Asdf, String> decorator = new Decorator("all");
+		Function<Asdf, String> decorator2 = new Decorator("two");
+		return Flux.merge(//
 				mRepo.getAll().map(decorator), //
-				mRepo.getAll().map(decorator),//
-				(a,b)->a.concat(b) //
+				mRepo.getTwo().map(decorator2) // , //
+		// (a, b) -> a.concat(b) //
 		);
 	}
 

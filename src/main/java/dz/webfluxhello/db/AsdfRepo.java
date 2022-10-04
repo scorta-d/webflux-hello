@@ -10,4 +10,7 @@ public interface AsdfRepo extends ReactiveCrudRepository<Asdf, Long> {
 	@Query("SELECT * FROM asdf")
 	Flux<Asdf> getAll();
 
+	@Query("SELECT * FROM asdf limit 2")
+	Flux<Asdf> getTwo();
+
 }
