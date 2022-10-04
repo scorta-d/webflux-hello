@@ -1,10 +1,13 @@
 package dz.webfluxhello.db;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 public class Asdf {
-
+	@Id
+	@Column ("asdf")
 	private Long mAsdf;
+	@Column ("name")
 	private String mName;
 
 	public Asdf() {
@@ -16,7 +19,7 @@ public class Asdf {
 		mName = name;
 	}
 
-	@Id
+	
 	public Long getAsdf() {
 		return mAsdf;
 	}
